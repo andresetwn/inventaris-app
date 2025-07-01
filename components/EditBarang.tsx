@@ -18,16 +18,6 @@ export default function EditBarang({
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  if (!isLoggedIn) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-        <p className="text-lg">
-          Silakan login terlebih dahulu untuk mengedit barang.
-        </p>
-      </div>
-    );
-  }
-
   const handleEdit = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("");
@@ -76,21 +66,42 @@ export default function EditBarang({
     setLoading(false);
   };
 
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white px-4">
+        <div className="text-center space-y-4">
+          <p className="text-lg font-semibold text-red-500">
+            Silakan login terlebih dahulu untuk mengedit barang.
+          </p>
+          <button
+            onClick={onBack}
+            className="mt-4 bg-white text-black px-4 py-2 rounded shadow hover:bg-gray-300 transition"
+          >
+            Kembali
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white relative px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white relative px-4 py-8">
+     
       <button
         onClick={onBack}
-        className="absolute top-28 right-12 bg-white text-black px-4 py-2 rounded-md shadow hover:bg-gray-500 transition flex space-x-1 items-center"
+        className="fixed right-4 top-20 sm:right-8 z-50 bg-white text-black px-3 py-2 rounded-md shadow hover:bg-gray-500 transition flex items-center space-x-2 text-sm sm:text-base"
       >
-        <FiArrowLeft />
+        <FiArrowLeft className="text-base sm:text-lg" />
         <span>Kembali</span>
       </button>
 
-      <h1 className="text-3xl font-bold mb-6">Edit Barang</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center mt-6">
+        Edit Barang
+      </h1>
 
       <form
         onSubmit={handleEdit}
-        className="bg-white shadow-lg text-black rounded p-6 w-full max-w-md space-y-4"
+        className="bg-white shadow-lg text-black rounded-md p-6 w-full max-w-md space-y-4"
       >
         <input
           type="text"

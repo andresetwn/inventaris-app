@@ -6,9 +6,11 @@ import LoginPopup from "./login";
 import { useAuth } from "@/context/authContext";
 import { saveAs } from "file-saver";
 import { supabase } from "@/lib/supabase";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { loggedInUser, setLoggedInUser } = useAuth();
 
   const handleLoginSuccess = (username: string) => {
@@ -68,7 +70,7 @@ export default function Navbar() {
             WarPut
           </Link>
 
-          <div className="flex space-x-6 items-center text-lg">
+          <div className="hidden md:flex space-x-6 items-center text-lg">
             <Link href="/" className="hover:underline">
               Beranda
             </Link>
@@ -77,16 +79,15 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4">
             {loggedInUser && (
               <button
                 onClick={handleDownloadLaporan}
-                className="text-base bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 mr-4"
+                className="text-base bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
               >
                 Download Laporan Stok
               </button>
             )}
-
             {loggedInUser ? (
               <>
                 <span className="text-lg">Hello, {loggedInUser}</span>
@@ -106,7 +107,72 @@ export default function Navbar() {
               </button>
             )}
           </div>
+
+          {/* Hamburger Button */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden px-4 py-2 space-y-3 text-lg text-center bg-gray-800">
+            <Link
+              href="/"
+              className="block hover:underline"
+              onClick={() => setMenuOpen(false)}
+            >
+              Beranda
+            </Link>
+            <Link
+              href="#DaftarBarang"
+              className="block hover:underline"
+              onClick={() => setMenuOpen(false)}
+            >
+              Daftar Barang
+            </Link>
+            {loggedInUser && (
+              <div className="flex flex-col items-center space-y-2">
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    handleDownloadLaporan();
+                  }}
+                  className="block bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
+                >
+                  Download Laporan Stok
+                </button>
+              </div>
+            )}
+            {loggedInUser ? (
+              <div className="flex flex-col items-center space-y-2">
+                <span className="block">Hello, {loggedInUser}</span>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMenuOpen(false);
+                  }}
+                  className="block bg-red-600 px-3 py-1 rounded hover:bg-red-700"
+                >
+                  Keluar
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  setShowLogin(true);
+                  setMenuOpen(false);
+                }}
+                className="bg-white text-black px-4 py-1 rounded-md hover:bg-gray-200"
+              >
+                Masuk
+              </button>
+            )}
+          </div>
+        )}
       </nav>
 
       <LoginPopup
