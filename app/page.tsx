@@ -9,6 +9,7 @@ import Navbar from "@/components/navbar";
 import DaftarBarang from "@/components/DaftarBarang";
 import LoginPopup from "@/components/login";
 import { useAuth } from "@/context/authContext";
+import Footer from "@/components/footer";
 
 export default function Page() {
   const [mode, setMode] = useState<
@@ -84,7 +85,9 @@ export default function Page() {
         onClose={() => setShowLogin(false)}
         onLoginSuccess={handleLoginSuccess}
       />
-      
+
+      <Footer />
+    
     </main>
   );
 }
