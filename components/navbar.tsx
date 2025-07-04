@@ -37,21 +37,15 @@ export default function Navbar() {
     }
 
     const csv = [
-      [
-        "Tanggal Input",
-        "Kode Barang",
-        "Nama Barang",
-        "Kategori",
-        "Harga",
-        "Stok",
-      ].join(","),
+      ["Tanggal Input", "Kode Barang", "Nama Barang", "Kategori", "Stok"].join(
+        ","
+      ),
       ...data.map((barang) =>
         [
           barang.tanggal,
           barang.kode_barang,
           barang.nama_barang,
           barang.kategori,
-          barang.harga,
           barang.stok,
         ]
           .map((val) => `"${String(val).replace(/"/g, '""')}"`)
@@ -108,7 +102,6 @@ export default function Navbar() {
             )}
           </div>
 
-          
           <button
             className="md:hidden text-white"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -117,7 +110,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        
         {menuOpen && (
           <div className="md:hidden px-4 py-2 space-y-3 text-lg text-center bg-gray-800">
             <Link
