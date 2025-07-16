@@ -3,13 +3,7 @@ import { useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { supabase } from "../lib/supabase";
 
-export default function HapusBarang({
-  onBack,
-  isLoggedIn,
-}: {
-  onBack: () => void;
-  isLoggedIn: boolean;
-}) {
+export default function HapusBarang({ onBack }: { onBack: () => void }) {
   const [kodeBarang, setKodeBarang] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -64,7 +58,6 @@ export default function HapusBarang({
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white relative px-4 py-8">
-    
       <button
         onClick={onBack}
         className="fixed right-4 top-20 sm:right-8 z-50 bg-white text-black px-3 py-2 rounded-md shadow hover:bg-gray-500 transition flex items-center space-x-2 text-sm sm:text-base"
@@ -76,12 +69,6 @@ export default function HapusBarang({
       <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-red-600 text-center mt-6">
         Hapus Barang
       </h1>
-
-      {!isLoggedIn ? (
-        <p className="bg-white text-red-700 p-4 rounded shadow text-center max-w-md w-full">
-          Silakan login terlebih dahulu untuk menghapus barang.
-        </p>
-      ) : (
         <form
           onSubmit={handleDelete}
           className="bg-white shadow-lg text-black rounded-md p-6 w-full max-w-md space-y-4"
@@ -117,7 +104,7 @@ export default function HapusBarang({
             {loading ? "Menghapus..." : "Hapus"}
           </button>
         </form>
-      )}
+     
     </div>
   );
 }

@@ -18,7 +18,6 @@ export default function CariBarang({
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white px-4">
-      
       <button
         onClick={onBack}
         className="fixed top-20 right-4 sm:right-8 z-50 bg-white text-black px-3 py-2 rounded-md shadow hover:bg-gray-500 transition flex items-center space-x-2 text-sm sm:text-base"

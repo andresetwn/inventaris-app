@@ -3,18 +3,11 @@ import { useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { supabase } from "../lib/supabase";
 
-export default function EditBarang({
-  onBack,
-  isLoggedIn,
-}: {
-  onBack: () => void;
-  isLoggedIn: boolean;
-}) {
+export default function EditBarang({ onBack }: { onBack: () => void }) {
   const [kodeBarang, setKodeBarang] = useState("");
   const [namaBaru, setNamaBaru] = useState("");
   const [kategoriBaru, setKategoriBaru] = useState("");
   const [hargaBaru, setHargaBaru] = useState<number | undefined>();
-  const [stokBaru, setStokBaru] = useState<number | undefined>();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -47,7 +40,6 @@ export default function EditBarang({
         nama_barang: namaBaru || barang.nama_barang,
         kategori: kategoriBaru || barang.kategori,
         harga: hargaBaru ?? barang.harga,
-        stok: stokBaru ?? barang.stok,
         tanggal: new Date().toISOString().slice(0, 10),
       })
       .eq("kode_barang", kodeBarang);
@@ -60,33 +52,13 @@ export default function EditBarang({
       setNamaBaru("");
       setKategoriBaru("");
       setHargaBaru(undefined);
-      setStokBaru(undefined);
     }
 
     setLoading(false);
   };
 
-  if (!isLoggedIn) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white px-4">
-        <div className="text-center space-y-4">
-          <p className="text-lg font-semibold text-red-500">
-            Silakan login terlebih dahulu untuk mengedit barang.
-          </p>
-          <button
-            onClick={onBack}
-            className="mt-4 bg-white text-black px-4 py-2 rounded shadow hover:bg-gray-300 transition"
-          >
-            Kembali
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white relative px-4 py-8">
-     
       <button
         onClick={onBack}
         className="fixed right-4 top-20 sm:right-8 z-50 bg-white text-black px-3 py-2 rounded-md shadow hover:bg-gray-500 transition flex items-center space-x-2 text-sm sm:text-base"
@@ -128,15 +100,11 @@ export default function EditBarang({
         <input
           type="number"
           placeholder="Harga Baru"
-          value={hargaBaru ?? ""}
-          onChange={(e) => setHargaBaru(parseInt(e.target.value))}
-          className="w-full border px-4 py-2 rounded"
-        />
-        <input
-          type="number"
-          placeholder="Stok Baru"
-          value={stokBaru ?? ""}
-          onChange={(e) => setStokBaru(parseInt(e.target.value))}
+          value={hargaBaru !== undefined ? hargaBaru : ""}
+          onChange={(e) => {
+            const value = e.target.value;
+            setHargaBaru(value === "" ? undefined : parseInt(value));
+          }}
           className="w-full border px-4 py-2 rounded"
         />
 

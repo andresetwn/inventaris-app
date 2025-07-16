@@ -10,14 +10,16 @@ import DaftarBarang from "@/components/DaftarBarang";
 import LoginPopup from "@/components/login";
 import { useAuth } from "@/context/authContext";
 import Footer from "@/components/footer";
+import UpdateStok from "@/components/UpdateStok";
 
 export default function Page() {
   const [mode, setMode] = useState<
-    "home" | "cari" | "tambah" | "edit" | "hapus"
+    "home" | "cari" | "tambah" | "edit" |"updateStok" | "hapus"
   >("home");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const { loggedInUser, setLoggedInUser } = useAuth();
+  const [keyword, setKeyword] = useState("");
 
   const goHome = () => setMode("home");
 
@@ -56,17 +58,19 @@ export default function Page() {
   }
 
   if (mode === "tambah") {
-    return <TambahBarang onBack={goHome} isLoggedIn={!!loggedInUser} />;
+    return <TambahBarang onBack={goHome} />;
   }
 
   if (mode === "edit") {
-    return <EditBarang onBack={goHome} isLoggedIn={!!loggedInUser} />;
+    return <EditBarang onBack={goHome} />;
   }
 
   if (mode === "hapus") {
-    return <HapusBarang onBack={goHome} isLoggedIn={!!loggedInUser} />;
+    return <HapusBarang onBack={goHome}  />;
   }
-
+  if (mode === "updateStok") {
+    return <UpdateStok onBack={goHome}  />;
+  }
   return (
     <main>
       <Navbar />
@@ -74,7 +78,15 @@ export default function Page() {
         onCari={() => setMode("cari")}
         onTambah={() => requireLogin(() => setMode("tambah"))}
         onEdit={() => requireLogin(() => setMode("edit"))}
+        onUpdateStok={() => requireLogin(() => setMode("updateStok"))}
         onHapus={() => requireLogin(() => setMode("hapus"))}
+        isLoggedIn={!!loggedInUser}
+        keyword={keyword}
+        setKeyword={setKeyword}
+        handleSearch={() => {
+          setSearchKeyword(keyword);
+          setKeyword("");
+        }}
       />
       <section id="DaftarBarang">
         <DaftarBarang keyword={searchKeyword} />
@@ -87,7 +99,6 @@ export default function Page() {
       />
 
       <Footer />
-    
     </main>
   );
 }

@@ -343,11 +343,10 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function TambahBarang({ onBack, isLoggedIn }) {
+function TambahBarang({ onBack }) {
     _s();
     const [nama, setNama] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [kode, setKode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    const [stok, setStok] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
     const [kategori, setKategori] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [harga, setHarga] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -355,8 +354,8 @@ function TambahBarang({ onBack, isLoggedIn }) {
     const handleTambah = async (e)=>{
         e.preventDefault();
         setMessage("");
-        if (!kode.trim() || !nama.trim() || stok === undefined || harga === undefined) {
-            setMessage("Semua kolom wajib diisi.");
+        if (!kode.trim() || !nama.trim() || harga === undefined) {
+            setMessage("Nama, Kode, dan Harga wajib diisi.");
             return;
         }
         setLoading(true);
@@ -372,7 +371,6 @@ function TambahBarang({ onBack, isLoggedIn }) {
                 nama_barang: nama,
                 kategori,
                 harga,
-                stok,
                 tanggal: new Date().toISOString().slice(0, 10)
             }
         ]);
@@ -383,47 +381,11 @@ function TambahBarang({ onBack, isLoggedIn }) {
             setMessage("Barang berhasil ditambahkan.");
             setNama("");
             setKode("");
-            setStok(undefined);
             setKategori("");
             setHarga(undefined);
         }
         setLoading(false);
     };
-    if (!isLoggedIn) {
-        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen flex items-center justify-center bg-gray-900 text-white px-4",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "text-center space-y-4",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-lg font-semibold text-red-500",
-                        children: "Silakan login terlebih dahulu untuk menambahkan barang."
-                    }, void 0, false, {
-                        fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 79,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: onBack,
-                        className: "mt-4 bg-white text-black px-4 py-2 rounded shadow hover:bg-gray-300 transition",
-                        children: "Kembali"
-                    }, void 0, false, {
-                        fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 82,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/components/TambahBarang.tsx",
-                lineNumber: 78,
-                columnNumber: 9
-            }, this)
-        }, void 0, false, {
-            fileName: "[project]/components/TambahBarang.tsx",
-            lineNumber: 77,
-            columnNumber: 7
-        }, this);
-    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white relative px-4 py-8",
         children: [
@@ -435,20 +397,20 @@ function TambahBarang({ onBack, isLoggedIn }) {
                         className: "text-base sm:text-lg"
                     }, void 0, false, {
                         fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 100,
+                        lineNumber: 67,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "Kembali"
                     }, void 0, false, {
                         fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 101,
+                        lineNumber: 68,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/TambahBarang.tsx",
-                lineNumber: 96,
+                lineNumber: 63,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -456,7 +418,7 @@ function TambahBarang({ onBack, isLoggedIn }) {
                 children: "Tambah Barang"
             }, void 0, false, {
                 fileName: "[project]/components/TambahBarang.tsx",
-                lineNumber: 104,
+                lineNumber: 71,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -472,7 +434,7 @@ function TambahBarang({ onBack, isLoggedIn }) {
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 112,
+                        lineNumber: 79,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -484,7 +446,7 @@ function TambahBarang({ onBack, isLoggedIn }) {
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 120,
+                        lineNumber: 87,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -495,31 +457,22 @@ function TambahBarang({ onBack, isLoggedIn }) {
                         className: "w-full border px-4 py-2 rounded"
                     }, void 0, false, {
                         fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 128,
+                        lineNumber: 95,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                         type: "number",
                         placeholder: "Harga",
-                        value: harga ?? "",
-                        onChange: (e)=>setHarga(parseInt(e.target.value)),
+                        value: harga !== undefined ? harga : "",
+                        onChange: (e)=>{
+                            const value = e.target.value;
+                            setHarga(value === "" ? undefined : parseInt(value));
+                        },
                         className: "w-full border px-4 py-2 rounded",
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 135,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                        type: "number",
-                        placeholder: "Stok",
-                        value: stok ?? "",
-                        onChange: (e)=>setStok(parseInt(e.target.value)),
-                        className: "w-full border px-4 py-2 rounded",
-                        required: true
-                    }, void 0, false, {
-                        fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 143,
+                        lineNumber: 102,
                         columnNumber: 9
                     }, this),
                     message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -527,7 +480,7 @@ function TambahBarang({ onBack, isLoggedIn }) {
                         children: message
                     }, void 0, false, {
                         fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 153,
+                        lineNumber: 115,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -537,23 +490,23 @@ function TambahBarang({ onBack, isLoggedIn }) {
                         children: loading ? "Menyimpan..." : "Simpan"
                     }, void 0, false, {
                         fileName: "[project]/components/TambahBarang.tsx",
-                        lineNumber: 162,
+                        lineNumber: 124,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/TambahBarang.tsx",
-                lineNumber: 108,
+                lineNumber: 75,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/TambahBarang.tsx",
-        lineNumber: 94,
+        lineNumber: 62,
         columnNumber: 5
     }, this);
 }
-_s(TambahBarang, "Q0GwTWiYIGxgIB4rdWO7Jr0/FZE=");
+_s(TambahBarang, "m5UqNAYAspclKtiAmgZNNI4K0zQ=");
 _c = TambahBarang;
 var _c;
 __turbopack_context__.k.register(_c, "TambahBarang");
@@ -579,13 +532,12 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function EditBarang({ onBack, isLoggedIn }) {
+function EditBarang({ onBack }) {
     _s();
     const [kodeBarang, setKodeBarang] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [namaBaru, setNamaBaru] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [kategoriBaru, setKategoriBaru] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [hargaBaru, setHargaBaru] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
-    const [stokBaru, setStokBaru] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const handleEdit = async (e)=>{
@@ -606,7 +558,6 @@ function EditBarang({ onBack, isLoggedIn }) {
             nama_barang: namaBaru || barang.nama_barang,
             kategori: kategoriBaru || barang.kategori,
             harga: hargaBaru ?? barang.harga,
-            stok: stokBaru ?? barang.stok,
             tanggal: new Date().toISOString().slice(0, 10)
         }).eq("kode_barang", kodeBarang);
         if (updateError) {
@@ -617,45 +568,9 @@ function EditBarang({ onBack, isLoggedIn }) {
             setNamaBaru("");
             setKategoriBaru("");
             setHargaBaru(undefined);
-            setStokBaru(undefined);
         }
         setLoading(false);
     };
-    if (!isLoggedIn) {
-        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen flex items-center justify-center bg-gray-900 text-white px-4",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "text-center space-y-4",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-lg font-semibold text-red-500",
-                        children: "Silakan login terlebih dahulu untuk mengedit barang."
-                    }, void 0, false, {
-                        fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 73,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: onBack,
-                        className: "mt-4 bg-white text-black px-4 py-2 rounded shadow hover:bg-gray-300 transition",
-                        children: "Kembali"
-                    }, void 0, false, {
-                        fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 76,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/components/EditBarang.tsx",
-                lineNumber: 72,
-                columnNumber: 9
-            }, this)
-        }, void 0, false, {
-            fileName: "[project]/components/EditBarang.tsx",
-            lineNumber: 71,
-            columnNumber: 7
-        }, this);
-    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white relative px-4 py-8",
         children: [
@@ -667,20 +582,20 @@ function EditBarang({ onBack, isLoggedIn }) {
                         className: "text-base sm:text-lg"
                     }, void 0, false, {
                         fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 94,
+                        lineNumber: 66,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "Kembali"
                     }, void 0, false, {
                         fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 95,
+                        lineNumber: 67,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/EditBarang.tsx",
-                lineNumber: 90,
+                lineNumber: 62,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -688,7 +603,7 @@ function EditBarang({ onBack, isLoggedIn }) {
                 children: "Edit Barang"
             }, void 0, false, {
                 fileName: "[project]/components/EditBarang.tsx",
-                lineNumber: 98,
+                lineNumber: 70,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -704,7 +619,7 @@ function EditBarang({ onBack, isLoggedIn }) {
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 106,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -715,7 +630,7 @@ function EditBarang({ onBack, isLoggedIn }) {
                         className: "w-full border px-4 py-2 rounded"
                     }, void 0, false, {
                         fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 114,
+                        lineNumber: 86,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -726,29 +641,21 @@ function EditBarang({ onBack, isLoggedIn }) {
                         className: "w-full border px-4 py-2 rounded"
                     }, void 0, false, {
                         fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 121,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                         type: "number",
                         placeholder: "Harga Baru",
-                        value: hargaBaru ?? "",
-                        onChange: (e)=>setHargaBaru(parseInt(e.target.value)),
+                        value: hargaBaru !== undefined ? hargaBaru : "",
+                        onChange: (e)=>{
+                            const value = e.target.value;
+                            setHargaBaru(value === "" ? undefined : parseInt(value));
+                        },
                         className: "w-full border px-4 py-2 rounded"
                     }, void 0, false, {
                         fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 128,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                        type: "number",
-                        placeholder: "Stok Baru",
-                        value: stokBaru ?? "",
-                        onChange: (e)=>setStokBaru(parseInt(e.target.value)),
-                        className: "w-full border px-4 py-2 rounded"
-                    }, void 0, false, {
-                        fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 135,
+                        lineNumber: 100,
                         columnNumber: 9
                     }, this),
                     message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -756,7 +663,7 @@ function EditBarang({ onBack, isLoggedIn }) {
                         children: message
                     }, void 0, false, {
                         fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 144,
+                        lineNumber: 112,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -766,23 +673,23 @@ function EditBarang({ onBack, isLoggedIn }) {
                         children: loading ? "Menyimpan..." : "Simpan Perubahan"
                     }, void 0, false, {
                         fileName: "[project]/components/EditBarang.tsx",
-                        lineNumber: 153,
+                        lineNumber: 121,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/EditBarang.tsx",
-                lineNumber: 102,
+                lineNumber: 74,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/EditBarang.tsx",
-        lineNumber: 88,
+        lineNumber: 61,
         columnNumber: 5
     }, this);
 }
-_s(EditBarang, "65xbUdlDuzlyW/9WX40Kqbbvixs=");
+_s(EditBarang, "TRuN7APXnJOs7Faq1uB1bVHJApk=");
 _c = EditBarang;
 var _c;
 __turbopack_context__.k.register(_c, "EditBarang");
@@ -808,7 +715,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function HapusBarang({ onBack, isLoggedIn }) {
+function HapusBarang({ onBack }) {
     _s();
     const [kodeBarang, setKodeBarang] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -853,20 +760,20 @@ function HapusBarang({ onBack, isLoggedIn }) {
                         className: "text-base sm:text-lg"
                     }, void 0, false, {
                         fileName: "[project]/components/HapusBarang.tsx",
-                        lineNumber: 72,
+                        lineNumber: 65,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "Kembali"
                     }, void 0, false, {
                         fileName: "[project]/components/HapusBarang.tsx",
-                        lineNumber: 73,
+                        lineNumber: 66,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/HapusBarang.tsx",
-                lineNumber: 68,
+                lineNumber: 61,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -874,17 +781,10 @@ function HapusBarang({ onBack, isLoggedIn }) {
                 children: "Hapus Barang"
             }, void 0, false, {
                 fileName: "[project]/components/HapusBarang.tsx",
-                lineNumber: 76,
+                lineNumber: 69,
                 columnNumber: 7
             }, this),
-            !isLoggedIn ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                className: "bg-white text-red-700 p-4 rounded shadow text-center max-w-md w-full",
-                children: "Silakan login terlebih dahulu untuk menghapus barang."
-            }, void 0, false, {
-                fileName: "[project]/components/HapusBarang.tsx",
-                lineNumber: 81,
-                columnNumber: 9
-            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                 onSubmit: handleDelete,
                 className: "bg-white shadow-lg text-black rounded-md p-6 w-full max-w-md space-y-4",
                 children: [
@@ -897,7 +797,7 @@ function HapusBarang({ onBack, isLoggedIn }) {
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/components/HapusBarang.tsx",
-                        lineNumber: 89,
+                        lineNumber: 76,
                         columnNumber: 11
                     }, this),
                     message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -905,7 +805,7 @@ function HapusBarang({ onBack, isLoggedIn }) {
                         children: message
                     }, void 0, false, {
                         fileName: "[project]/components/HapusBarang.tsx",
-                        lineNumber: 99,
+                        lineNumber: 86,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -915,19 +815,19 @@ function HapusBarang({ onBack, isLoggedIn }) {
                         children: loading ? "Menghapus..." : "Hapus"
                     }, void 0, false, {
                         fileName: "[project]/components/HapusBarang.tsx",
-                        lineNumber: 108,
+                        lineNumber: 95,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/HapusBarang.tsx",
-                lineNumber: 85,
+                lineNumber: 72,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/HapusBarang.tsx",
-        lineNumber: 66,
+        lineNumber: 60,
         columnNumber: 5
     }, this);
 }
@@ -1314,15 +1214,348 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
 }
 }}),
-"[project]/app/page.tsx [app-client] (ecmascript)": (function(__turbopack_context__) {
+"[project]/components/UpdateStok.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
 
-var { g: global, __dirname, k: __turbopack_refresh__, m: module, e: exports } = __turbopack_context__;
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
 {
-const e = new Error(`Could not parse module '[project]/app/page.tsx'
+__turbopack_context__.s({
+    "default": (()=>UpdateStokBarang)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-icons/fi/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/supabase.ts [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+;
+;
+function UpdateStokBarang({ onBack }) {
+    _s();
+    const [kodeBarang, setKodeBarang] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [stokBaru, setStokBaru] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
+    const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const handleUpdateStok = async ()=>{
+        setMessage("");
+        if (!kodeBarang.trim() || stokBaru === undefined || isNaN(stokBaru) || stokBaru < 0) {
+            setMessage("Mohon isi kode barang dan stok dengan benar.");
+            return;
+        }
+        setLoading(true);
+        const { data: barang, error: fetchError } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("Barang_Warput").select("*").eq("kode_barang", kodeBarang).single();
+        if (fetchError || !barang) {
+            setMessage(`Barang dengan kode "${kodeBarang}" tidak ditemukan.`);
+            setLoading(false);
+            return;
+        }
+        const { error: updateError } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("Barang_Warput").update({
+            stok: stokBaru,
+            tanggal: new Date().toISOString().slice(0, 10)
+        }).eq("kode_barang", kodeBarang);
+        if (updateError) {
+            console.error(updateError.message);
+            setMessage("Gagal mengupdate stok barang.");
+        } else {
+            setMessage(`Stok barang "${kodeBarang}" berhasil diupdate.`);
+            setKodeBarang("");
+            setStokBaru(undefined);
+        }
+        setLoading(false);
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white px-4",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                onClick: onBack,
+                className: "fixed top-20 right-4 sm:right-8 z-50 bg-white text-black px-3 py-2 rounded-md shadow hover:bg-gray-500 transition flex items-center space-x-2 text-sm sm:text-base",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiArrowLeft"], {
+                        className: "text-base sm:text-lg"
+                    }, void 0, false, {
+                        fileName: "[project]/components/UpdateStok.tsx",
+                        lineNumber: 62,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        children: "Kembali"
+                    }, void 0, false, {
+                        fileName: "[project]/components/UpdateStok.tsx",
+                        lineNumber: 63,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/UpdateStok.tsx",
+                lineNumber: 58,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                className: "text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center mt-20",
+                children: "Update Stok Barang"
+            }, void 0, false, {
+                fileName: "[project]/components/UpdateStok.tsx",
+                lineNumber: 66,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex flex-col gap-4 w-full max-w-md",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                        type: "text",
+                        value: kodeBarang,
+                        onChange: (e)=>setKodeBarang(e.target.value),
+                        placeholder: "Kode Barang",
+                        className: "px-4 py-2 rounded bg-white text-black focus:outline-none"
+                    }, void 0, false, {
+                        fileName: "[project]/components/UpdateStok.tsx",
+                        lineNumber: 71,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                        type: "number",
+                        value: stokBaru !== undefined ? stokBaru : "",
+                        onChange: (e)=>{
+                            const value = e.target.value;
+                            setStokBaru(value === "" ? undefined : parseInt(value));
+                        },
+                        placeholder: "Jumlah Stok Baru",
+                        className: "px-4 py-2 rounded bg-white text-black focus:outline-none"
+                    }, void 0, false, {
+                        fileName: "[project]/components/UpdateStok.tsx",
+                        lineNumber: 79,
+                        columnNumber: 9
+                    }, this),
+                    message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: `text-center ${message.includes("berhasil") ? "text-green-400" : "text-red-500"}`,
+                        children: message
+                    }, void 0, false, {
+                        fileName: "[project]/components/UpdateStok.tsx",
+                        lineNumber: 91,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: handleUpdateStok,
+                        disabled: loading,
+                        className: `bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded ${loading ? "opacity-50 cursor-not-allowed" : ""}`,
+                        children: loading ? "Menyimpan..." : "Update Stok"
+                    }, void 0, false, {
+                        fileName: "[project]/components/UpdateStok.tsx",
+                        lineNumber: 100,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/UpdateStok.tsx",
+                lineNumber: 70,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/UpdateStok.tsx",
+        lineNumber: 57,
+        columnNumber: 5
+    }, this);
+}
+_s(UpdateStokBarang, "h7ySp2MdRR7VjpGD5MEuLfZtX0A=");
+_c = UpdateStokBarang;
+var _c;
+__turbopack_context__.k.register(_c, "UpdateStokBarang");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
+"[project]/app/page.tsx [app-client] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
 
-Unexpected token `onBack`. Expected jsx identifier`);
-e.code = 'MODULE_UNPARSEABLE';
-throw e;}}),
+var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>Page)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$home$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/home.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CariBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/CariBarang.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TambahBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/TambahBarang.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$EditBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/EditBarang.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$HapusBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/HapusBarang.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$navbar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/navbar.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$DaftarBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/DaftarBarang.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$login$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/login.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$authContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/context/authContext.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$footer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/footer.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$UpdateStok$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/UpdateStok.tsx [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+function Page() {
+    _s();
+    const [mode, setMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("home");
+    const [searchKeyword, setSearchKeyword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [showLogin, setShowLogin] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const { loggedInUser, setLoggedInUser } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$authContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
+    const [keyword, setKeyword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const goHome = ()=>setMode("home");
+    const requireLogin = (action)=>{
+        if (loggedInUser) {
+            action();
+        } else {
+            alert("Silakan login terlebih dahulu.");
+            setShowLogin(true);
+        }
+    };
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Page.useEffect": ()=>{
+            const token = localStorage.getItem("token");
+            if (token) {
+                const decoded = atob(token);
+                const username = decoded.split(":")[0];
+                setLoggedInUser(username);
+            }
+        }
+    }["Page.useEffect"], [
+        setLoggedInUser
+    ]);
+    const handleLoginSuccess = (username)=>{
+        setLoggedInUser(username);
+        setShowLogin(false);
+    };
+    if (mode === "cari") {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CariBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            onBack: goHome,
+            onSearch: (keyword)=>{
+                setSearchKeyword(keyword);
+                setMode("home");
+            }
+        }, void 0, false, {
+            fileName: "[project]/app/page.tsx",
+            lineNumber: 50,
+            columnNumber: 7
+        }, this);
+    }
+    if (mode === "tambah") {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TambahBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            onBack: goHome
+        }, void 0, false, {
+            fileName: "[project]/app/page.tsx",
+            lineNumber: 61,
+            columnNumber: 12
+        }, this);
+    }
+    if (mode === "edit") {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$EditBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            onBack: goHome
+        }, void 0, false, {
+            fileName: "[project]/app/page.tsx",
+            lineNumber: 65,
+            columnNumber: 12
+        }, this);
+    }
+    if (mode === "hapus") {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$HapusBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            onBack: goHome
+        }, void 0, false, {
+            fileName: "[project]/app/page.tsx",
+            lineNumber: 69,
+            columnNumber: 12
+        }, this);
+    }
+    if (mode === "updateStok") {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$UpdateStok$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            onBack: goHome
+        }, void 0, false, {
+            fileName: "[project]/app/page.tsx",
+            lineNumber: 72,
+            columnNumber: 12
+        }, this);
+    }
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$navbar$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 76,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$home$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                onCari: ()=>setMode("cari"),
+                onTambah: ()=>requireLogin(()=>setMode("tambah")),
+                onEdit: ()=>requireLogin(()=>setMode("edit")),
+                onUpdateStok: ()=>requireLogin(()=>setMode("updateStok")),
+                onHapus: ()=>requireLogin(()=>setMode("hapus")),
+                isLoggedIn: !!loggedInUser,
+                keyword: keyword,
+                setKeyword: setKeyword,
+                handleSearch: ()=>{
+                    setSearchKeyword(keyword);
+                    setKeyword("");
+                }
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 77,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                id: "DaftarBarang",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$DaftarBarang$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    keyword: searchKeyword
+                }, void 0, false, {
+                    fileName: "[project]/app/page.tsx",
+                    lineNumber: 92,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 91,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$login$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                isOpen: showLogin,
+                onClose: ()=>setShowLogin(false),
+                onLoginSuccess: handleLoginSuccess
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 95,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$footer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 101,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/app/page.tsx",
+        lineNumber: 75,
+        columnNumber: 5
+    }, this);
+}
+_s(Page, "w0ufZByDkPlJ17s5LxPLWq+AJuU=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$authContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"]
+    ];
+});
+_c = Page;
+var _c;
+__turbopack_context__.k.register(_c, "Page");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
+}
+}}),
 }]);
 
-//# sourceMappingURL=_30843878._.js.map
+//# sourceMappingURL=_cb46630b._.js.map

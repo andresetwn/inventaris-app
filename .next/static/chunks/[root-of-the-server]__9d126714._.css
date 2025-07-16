@@ -129,6 +129,9 @@
     --color-red-500: oklch(63.7% .237 25.331);
     --color-red-600: oklch(57.7% .245 27.325);
     --color-red-700: oklch(50.5% .213 27.518);
+    --color-yellow-600: oklch(68.1% .162 75.834);
+    --color-yellow-700: oklch(55.4% .135 66.442);
+    --color-green-400: oklch(79.2% .209 151.711);
     --color-green-600: oklch(62.7% .194 149.214);
     --color-blue-600: oklch(54.6% .245 262.881);
     --color-blue-700: oklch(48.8% .243 264.376);
@@ -393,10 +396,6 @@
     right: calc(var(--spacing) * 4);
   }
 
-  .bottom-0 {
-    bottom: calc(var(--spacing) * 0);
-  }
-
   .z-50 {
     z-index: 50;
   }
@@ -417,14 +416,6 @@
     margin-top: calc(var(--spacing) * 6);
   }
 
-  .mt-8 {
-    margin-top: calc(var(--spacing) * 8);
-  }
-
-  .mt-10 {
-    margin-top: calc(var(--spacing) * 10);
-  }
-
   .mt-20 {
     margin-top: calc(var(--spacing) * 20);
   }
@@ -443,10 +434,6 @@
 
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
-  }
-
-  .mb-20 {
-    margin-bottom: calc(var(--spacing) * 20);
   }
 
   .block {
@@ -585,11 +572,6 @@
     border-radius: var(--radius-md);
   }
 
-  .rounded-t-lg {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
-  }
-
   .rounded-r-full {
     border-top-right-radius: 3.40282e38px;
     border-bottom-right-radius: 3.40282e38px;
@@ -607,10 +589,6 @@
 
   .border-gray-700 {
     border-color: var(--color-gray-700);
-  }
-
-  .bg-\[\#6B0000\] {
-    background-color: #6b0000;
   }
 
   .bg-black {
@@ -661,6 +639,10 @@
     background-color: var(--color-white);
   }
 
+  .bg-yellow-600 {
+    background-color: var(--color-yellow-600);
+  }
+
   .p-3 {
     padding: calc(var(--spacing) * 3);
   }
@@ -703,10 +685,6 @@
 
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
-  }
-
-  .pb-10 {
-    padding-bottom: calc(var(--spacing) * 10);
   }
 
   .pl-4 {
@@ -785,6 +763,10 @@
     color: var(--color-gray-800);
   }
 
+  .text-green-400 {
+    color: var(--color-green-400);
+  }
+
   .text-green-600 {
     color: var(--color-green-600);
   }
@@ -812,6 +794,10 @@
   .antialiased {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .opacity-50 {
+    opacity: .5;
   }
 
   .shadow {
@@ -894,6 +880,12 @@
   @media (hover: hover) {
     .hover\:bg-red-700:hover {
       background-color: var(--color-red-700);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-yellow-700:hover {
+      background-color: var(--color-yellow-700);
     }
   }
 
