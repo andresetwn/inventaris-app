@@ -1235,19 +1235,26 @@ var _s = __turbopack_context__.k.signature();
 function UpdateStokBarang({ onBack }) {
     _s();
     const [kodeBarang, setKodeBarang] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    const [stokBaru, setStokBaru] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
+    const [jumlahPerubahan, setJumlahPerubahan] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
+    const [tipe, setTipe] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("Masuk");
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const handleUpdateStok = async ()=>{
         setMessage("");
-        if (!kodeBarang.trim() || stokBaru === undefined || isNaN(stokBaru) || stokBaru < 0) {
-            setMessage("Mohon isi kode barang dan stok dengan benar.");
+        if (!kodeBarang.trim() || jumlahPerubahan === undefined || isNaN(jumlahPerubahan) || jumlahPerubahan <= 0) {
+            setMessage("Mohon isi kode barang dan jumlah perubahan dengan benar.");
             return;
         }
         setLoading(true);
         const { data: barang, error: fetchError } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("Barang_Warput").select("*").eq("kode_barang", kodeBarang).single();
         if (fetchError || !barang) {
             setMessage(`Barang dengan kode "${kodeBarang}" tidak ditemukan.`);
+            setLoading(false);
+            return;
+        }
+        const stokBaru = tipe === "Masuk" ? barang.stok + jumlahPerubahan : barang.stok - jumlahPerubahan;
+        if (stokBaru < 0) {
+            setMessage("Stok tidak boleh kurang dari 0.");
             setLoading(false);
             return;
         }
@@ -1258,10 +1265,22 @@ function UpdateStokBarang({ onBack }) {
         if (updateError) {
             console.error(updateError.message);
             setMessage("Gagal mengupdate stok barang.");
+            setLoading(false);
+            return;
+        }
+        const { error: insertError } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("Persediaan").insert({
+            kode_barang: kodeBarang,
+            tipe: tipe,
+            jumlah: jumlahPerubahan,
+            tanggal: new Date().toISOString().slice(0, 10)
+        });
+        if (insertError) {
+            console.error(insertError.message);
+            setMessage("Stok terupdate, tetapi gagal mencatat di persediaan.");
         } else {
-            setMessage(`Stok barang "${kodeBarang}" berhasil diupdate.`);
+            setMessage(`Stok barang "${kodeBarang}" berhasil diupdate & dicatat.`);
             setKodeBarang("");
-            setStokBaru(undefined);
+            setJumlahPerubahan(undefined);
         }
         setLoading(false);
     };
@@ -1276,28 +1295,28 @@ function UpdateStokBarang({ onBack }) {
                         className: "text-base sm:text-lg"
                     }, void 0, false, {
                         fileName: "[project]/components/UpdateStok.tsx",
-                        lineNumber: 62,
+                        lineNumber: 92,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "Kembali"
                     }, void 0, false, {
                         fileName: "[project]/components/UpdateStok.tsx",
-                        lineNumber: 63,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/UpdateStok.tsx",
-                lineNumber: 58,
+                lineNumber: 88,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                 className: "text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center mt-20",
-                children: "Update Stok Barang"
+                children: "Update Stok Barang & Catat Persediaan"
             }, void 0, false, {
                 fileName: "[project]/components/UpdateStok.tsx",
-                lineNumber: 66,
+                lineNumber: 96,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1311,21 +1330,48 @@ function UpdateStokBarang({ onBack }) {
                         className: "px-4 py-2 rounded bg-white text-black focus:outline-none"
                     }, void 0, false, {
                         fileName: "[project]/components/UpdateStok.tsx",
-                        lineNumber: 71,
+                        lineNumber: 101,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                        value: tipe,
+                        onChange: (e)=>setTipe(e.target.value),
+                        className: "px-4 py-2 rounded bg-white text-black focus:outline-none",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                value: "Masuk",
+                                children: "Masuk"
+                            }, void 0, false, {
+                                fileName: "[project]/components/UpdateStok.tsx",
+                                lineNumber: 114,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                value: "Keluar",
+                                children: "Keluar"
+                            }, void 0, false, {
+                                fileName: "[project]/components/UpdateStok.tsx",
+                                lineNumber: 115,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/UpdateStok.tsx",
+                        lineNumber: 109,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                         type: "number",
-                        value: stokBaru !== undefined ? stokBaru : "",
+                        value: jumlahPerubahan !== undefined ? jumlahPerubahan : "",
                         onChange: (e)=>{
                             const value = e.target.value;
-                            setStokBaru(value === "" ? undefined : parseInt(value));
+                            setJumlahPerubahan(value === "" ? undefined : parseInt(value));
                         },
-                        placeholder: "Jumlah Stok Baru",
+                        placeholder: "Jumlah Barang",
                         className: "px-4 py-2 rounded bg-white text-black focus:outline-none"
                     }, void 0, false, {
                         fileName: "[project]/components/UpdateStok.tsx",
-                        lineNumber: 79,
+                        lineNumber: 118,
                         columnNumber: 9
                     }, this),
                     message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1333,33 +1379,33 @@ function UpdateStokBarang({ onBack }) {
                         children: message
                     }, void 0, false, {
                         fileName: "[project]/components/UpdateStok.tsx",
-                        lineNumber: 91,
+                        lineNumber: 130,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: handleUpdateStok,
                         disabled: loading,
                         className: `bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded ${loading ? "opacity-50 cursor-not-allowed" : ""}`,
-                        children: loading ? "Menyimpan..." : "Update Stok"
+                        children: loading ? "Menyimpan..." : "Update & Catat"
                     }, void 0, false, {
                         fileName: "[project]/components/UpdateStok.tsx",
-                        lineNumber: 100,
+                        lineNumber: 139,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/UpdateStok.tsx",
-                lineNumber: 70,
+                lineNumber: 100,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/UpdateStok.tsx",
-        lineNumber: 57,
+        lineNumber: 87,
         columnNumber: 5
     }, this);
 }
-_s(UpdateStokBarang, "h7ySp2MdRR7VjpGD5MEuLfZtX0A=");
+_s(UpdateStokBarang, "gHwrJSc/GnUvesQBCinV80+5s9s=");
 _c = UpdateStokBarang;
 var _c;
 __turbopack_context__.k.register(_c, "UpdateStokBarang");

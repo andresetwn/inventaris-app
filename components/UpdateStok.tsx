@@ -5,7 +5,8 @@ import { supabase } from "../lib/supabase";
 
 export default function UpdateStokBarang({ onBack }: { onBack: () => void }) {
   const [kodeBarang, setKodeBarang] = useState("");
-  const [stokBaru, setStokBaru] = useState<number | undefined>();
+  const [jumlahPerubahan, setJumlahPerubahan] = useState<number | undefined>();
+  const [tipe, setTipe] = useState<"Masuk" | "Keluar">("Masuk");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -13,14 +14,16 @@ export default function UpdateStokBarang({ onBack }: { onBack: () => void }) {
     setMessage("");
     if (
       !kodeBarang.trim() ||
-      stokBaru === undefined ||
-      isNaN(stokBaru) ||
-      stokBaru < 0
+      jumlahPerubahan === undefined ||
+      isNaN(jumlahPerubahan) ||
+      jumlahPerubahan <= 0
     ) {
-      setMessage("Mohon isi kode barang dan stok dengan benar.");
+      setMessage("Mohon isi kode barang dan jumlah perubahan dengan benar.");
       return;
     }
+
     setLoading(true);
+
     const { data: barang, error: fetchError } = await supabase
       .from("Barang_Warput")
       .select("*")
@@ -29,6 +32,17 @@ export default function UpdateStokBarang({ onBack }: { onBack: () => void }) {
 
     if (fetchError || !barang) {
       setMessage(`Barang dengan kode "${kodeBarang}" tidak ditemukan.`);
+      setLoading(false);
+      return;
+    }
+
+    const stokBaru =
+      tipe === "Masuk"
+        ? barang.stok + jumlahPerubahan
+        : barang.stok - jumlahPerubahan;
+
+    if (stokBaru < 0) {
+      setMessage("Stok tidak boleh kurang dari 0.");
       setLoading(false);
       return;
     }
@@ -44,10 +58,26 @@ export default function UpdateStokBarang({ onBack }: { onBack: () => void }) {
     if (updateError) {
       console.error(updateError.message);
       setMessage("Gagal mengupdate stok barang.");
+      setLoading(false);
+      return;
+    }
+
+    const { error: insertError } = await supabase
+      .from("Persediaan")
+      .insert({
+        kode_barang: kodeBarang,
+        tipe: tipe,
+        jumlah: jumlahPerubahan,
+        tanggal: new Date().toISOString().slice(0, 10),
+      });
+
+    if (insertError) {
+      console.error(insertError.message);
+      setMessage("Stok terupdate, tetapi gagal mencatat di persediaan.");
     } else {
-      setMessage(`Stok barang "${kodeBarang}" berhasil diupdate.`);
+      setMessage(`Stok barang "${kodeBarang}" berhasil diupdate & dicatat.`);
       setKodeBarang("");
-      setStokBaru(undefined);
+      setJumlahPerubahan(undefined);
     }
 
     setLoading(false);
@@ -64,7 +94,7 @@ export default function UpdateStokBarang({ onBack }: { onBack: () => void }) {
       </button>
 
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center mt-20">
-        Update Stok Barang
+        Update Stok Barang & Catat Persediaan
       </h1>
 
       <div className="flex flex-col gap-4 w-full max-w-md">
@@ -76,14 +106,23 @@ export default function UpdateStokBarang({ onBack }: { onBack: () => void }) {
           className="px-4 py-2 rounded bg-white text-black focus:outline-none"
         />
 
+        <select
+          value={tipe}
+          onChange={(e) => setTipe(e.target.value as "Masuk" | "Keluar")}
+          className="px-4 py-2 rounded bg-white text-black focus:outline-none"
+        >
+          <option value="Masuk">Masuk</option>
+          <option value="Keluar">Keluar</option>
+        </select>
+
         <input
           type="number"
-          value={stokBaru !== undefined ? stokBaru : ""}
+          value={jumlahPerubahan !== undefined ? jumlahPerubahan : ""}
           onChange={(e) => {
             const value = e.target.value;
-            setStokBaru(value === "" ? undefined : parseInt(value));
+            setJumlahPerubahan(value === "" ? undefined : parseInt(value));
           }}
-          placeholder="Jumlah Stok Baru"
+          placeholder="Jumlah Barang"
           className="px-4 py-2 rounded bg-white text-black focus:outline-none"
         />
 
@@ -104,7 +143,7 @@ export default function UpdateStokBarang({ onBack }: { onBack: () => void }) {
             loading ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
-          {loading ? "Menyimpan..." : "Update Stok"}
+          {loading ? "Menyimpan..." : "Update & Catat"}
         </button>
       </div>
     </div>

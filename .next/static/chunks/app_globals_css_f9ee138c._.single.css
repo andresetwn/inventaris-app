@@ -314,10 +314,6 @@
     margin-top: calc(var(--spacing) * 3);
   }
 
-  .mt-4 {
-    margin-top: calc(var(--spacing) * 4);
-  }
-
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
@@ -689,10 +685,6 @@
     color: var(--color-red-600);
   }
 
-  .text-red-700 {
-    color: var(--color-red-700);
-  }
-
   .text-white {
     color: var(--color-white);
   }
@@ -750,12 +742,6 @@
   @media (hover: hover) {
     .hover\:bg-gray-200:hover {
       background-color: var(--color-gray-200);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:bg-gray-300:hover {
-      background-color: var(--color-gray-300);
     }
   }
 
